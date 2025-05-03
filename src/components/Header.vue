@@ -1,7 +1,8 @@
 <script setup lang="ts">
-	const emit = defineEmits<{ (e: 'openCart'): void }>();
-</script>
+	import { useCartStore } from '../store/cart';
 
+	const cartStore = useCartStore();
+</script>
 <template>
 	<header class="header flex items-center justify-between pt-11 pl-11 pr-[60px]">
 		<div class="flex items-center gap-[16px]">
@@ -13,11 +14,11 @@
 		</div>
 		<div class="flex items-center gap-[32px]">
 			<button
-				@click="emit('openCart')"
+				@click="cartStore.onCartVisible()"
 				class="flex gap-2.5 cursor-pointer text-gray-500 hover:text-black"
 			>
 				<img src="../../public/cart.svg" alt="cart-img" />
-				<p>1200 тг</p>
+				<p>{{ cartStore.totalPrice }} тг</p>
 			</button>
 			<button class="flex gap-2.5 cursor-pointer text-gray-500 hover:text-black">
 				<img src="../../public/heart.svg" alt="heart-img" />

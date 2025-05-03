@@ -1,5 +1,8 @@
 <script setup lang="ts">
+	import { useCartStore } from '../store/cart';
 	import type { TSneaker } from '../types/sneaker';
+
+	const { addToCart } = useCartStore();
 
 	defineProps<{ sneaker: TSneaker }>();
 </script>
@@ -15,6 +18,7 @@
 			</div>
 
 			<img
+				@click="addToCart(sneaker)"
 				class="w-[32px] h-[32px] self-end cursor-pointer"
 				src="../../public/close.svg"
 				alt="close-icon"
