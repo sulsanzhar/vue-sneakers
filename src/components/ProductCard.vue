@@ -36,7 +36,7 @@
 			<img width="133px" height="112px" :src="sneaker.imageUrl" alt="sneakers-photo" />
 			<img
 				class="absolute top-0 left-0 cursor-pointer"
-				:src="sneaker.isLiked ? '../../public/like-2.svg' : '../../public/like-1.svg'"
+				:src="sneaker.isLiked ? '/public/like-2.svg' : '/public/like-1.svg'"
 				@click="emit('on-liked', sneaker)"
 				alt="like-icon"
 			/>
@@ -49,7 +49,7 @@
 			</p>
 			<button class="cursor-pointer">
 				<img
-					:src="sneaker.isAdded ? '../../public/checked.svg' : '../../public/plus.svg'"
+					:src="sneaker.isAdded ? '/public/checked.svg' : '/public/plus.svg'"
 					@click="!sneaker.isAdded ? emit('on-added', sneaker) : emit('on-removed', sneaker)"
 					alt="plus-icon"
 				/>
