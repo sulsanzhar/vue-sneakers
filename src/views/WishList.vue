@@ -21,7 +21,7 @@
 
 	const getOrders = async () => {
 		try {
-			const { data } = await axios.get(
+			const { data } = await axios.get<TWishlist[]>(
 				'https://8ac6263e30881f16.mokky.dev/favorites?_relations=sneakers'
 			);
 

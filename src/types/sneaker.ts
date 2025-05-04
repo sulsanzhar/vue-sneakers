@@ -6,4 +6,6 @@ export type TSneaker = {
 	isAdded: boolean;
 	isLiked: boolean;
 	isLikedId: number;
+	isAddedId: number;
+	count?: number;
 };
