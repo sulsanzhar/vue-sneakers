@@ -61,13 +61,20 @@
 		@click.stop
 	>
 		<div v-if="!isChangedClicked" class="space-y-[20px]">
-			<img
-				width="100px"
-				class="m-auto rounded-full"
-				:src="person.image || '/profile.svg'"
-				alt="profile"
-			/>
-			<h3 class="text-center">{{ person.name }} {{ person.surname }}</h3>
+			<div class="flex justify-center items-center gap-2">
+				<img
+					width="100px"
+					class="rounded-full"
+					:src="person.image || '/profile.svg'"
+					alt="profile"
+				/>
+				<div>
+					<h3 class="flex gap-3"><span class="flex text-right">Имя: </span>{{ person.name }}</h3>
+					<h3 class="flex gap-3">
+						<span class="flex text-right">Фамилия: </span>{{ person.surname }}
+					</h3>
+				</div>
+			</div>
 			<p>{{ person.email }}</p>
 		</div>
 

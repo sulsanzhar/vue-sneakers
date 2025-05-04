@@ -3,11 +3,13 @@
 	import { useCartStore } from '../store/cart';
 	import { RouterLink } from 'vue-router';
 	import ProfileModal from '../components/ProfileModal.vue';
+	import Password from '../components/Password.vue';
 
 	const cartStore = useCartStore();
 
 	const isOpen = ref(false);
 	const isProfileOpen = ref(false);
+	const isPassOpen = ref(false);
 </script>
 <template>
 	<header class="header flex items-center justify-between pt-11 pl-11 pr-[60px]">
@@ -50,7 +52,7 @@
 				</button>
 				<ul
 					v-if="isOpen"
-					class="absolute z-10 top-[30px] right-0 bg-white border border-[#EAEAEA] rounded-[10px] py-[10px] px-[20px]"
+					class="absolute z-10 top-[30px] right-0 bg-white border border-[#EAEAEA] rounded-[10px] py-[20px] px-[30px] flex flex-wrap gap-[10px]"
 				>
 					<li
 						class="cursor-pointer"
@@ -61,7 +63,16 @@
 					>
 						Профиль
 					</li>
-					<li>Выйти</li>
+					<li
+						@click="
+							isPassOpen = !isPassOpen;
+							isOpen = !isOpen;
+						"
+						class="cursor-pointer"
+					>
+						Безопасность
+					</li>
+					<li class="cursor-pointer">Выйти</li>
 				</ul>
 			</div>
 		</div>
@@ -74,4 +85,5 @@
 		email="sulsanzhar@mail.ru"
 		image=""
 	/>
+	<Password v-if="isPassOpen" @close="isPassOpen = !isPassOpen" />
 </template>

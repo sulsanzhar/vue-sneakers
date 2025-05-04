@@ -5,29 +5,43 @@ import axios from 'axios';
 
 export const useSneakerStore = defineStore('sneaker', () => {
 	let sneakers = ref<TSneaker[]>([]);
+
 	const filters = reactive({
 		searchByTitle: '',
 		sortBy: 'price',
 		sortDirection: true,
 	});
 
+	const currentPage = ref(1);
+	const totalPages = ref(0);
+	const perPage = ref(8);
+
 	const getItems = async () => {
 		try {
-			const params = {
-				sortBy: (filters.sortDirection ? '' : '-') + 'price',
+			const params: any = {
+				page: currentPage.value,
+				limit: perPage.value,
+				sortBy: (filters.sortDirection ? '' : '-') + filters.sortBy,
 			};
 
-			if (filters.searchByTitle) params.title = `*${filters.searchByTitle}*`;
+			if (filters.searchByTitle) {
+				params.title = `*${filters.searchByTitle}*`;
+			}
 
 			const { data } = await axios.get('https://8ac6263e30881f16.mokky.dev/sneakers', {
-				params: params,
+				params,
 			});
 
-			console.log('data from sneaker: ', data);
-			sneakers.value = data;
+			sneakers.value = data.items;
+			totalPages.value = data.meta.total_pages;
 		} catch (error) {
 			console.log('error: ', error);
 		}
+	};
+
+	const changePage = (page: number) => {
+		currentPage.value = page;
+		getItems();
 	};
 
 	const getFavorites = async () => {
@@ -50,5 +64,13 @@ export const useSneakerStore = defineStore('sneaker', () => {
 		}
 	};
 
-	return { getItems, getFavorites, sneakers, filters };
+	return {
+		getItems,
+		getFavorites,
+		sneakers,
+		filters,
+		currentPage,
+		totalPages,
+		changePage,
+	};
 });
