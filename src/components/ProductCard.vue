@@ -7,6 +7,7 @@
 	const emit = defineEmits<{
 		'on-added': [sneaker: TSneaker];
 		'on-liked': [sneaker: TSneaker];
+		'on-removed': [sneaker: TSneaker];
 	}>();
 </script>
 
@@ -49,7 +50,7 @@
 			<button class="cursor-pointer">
 				<img
 					:src="sneaker.isAdded ? '../../public/checked.svg' : '../../public/plus.svg'"
-					@click="emit('on-added', sneaker)"
+					@click="!sneaker.isAdded ? emit('on-added', sneaker) : emit('on-removed', sneaker)"
 					alt="plus-icon"
 				/>
 			</button>

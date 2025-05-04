@@ -2,7 +2,7 @@
 	import { useCartStore } from '../store/cart';
 	import type { TSneaker } from '../types/sneaker';
 
-	const { addToCart } = useCartStore();
+	const { removeFromCart } = useCartStore();
 
 	defineProps<{ sneaker: TSneaker }>();
 </script>
@@ -18,7 +18,7 @@
 			</div>
 
 			<img
-				@click="addToCart(sneaker)"
+				@click="removeFromCart(sneaker)"
 				class="w-[32px] h-[32px] self-end cursor-pointer"
 				src="../../public/close.svg"
 				alt="close-icon"
